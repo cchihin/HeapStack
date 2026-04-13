@@ -30,10 +30,10 @@ int main(int argc, char** argv)
     int N = std::stoll(argv[1]);
     int B = std::stoi(argv[2]);
 
-    int* a = new int[N];
-    int* b = new int[N];
-    int* c = new int[N];
-    double* t = new double[B];
+    int a[N];
+    int b[N];
+    int c[N];
+    double t[B];
     double  t_avrg = 0.0;
 
     // Initialise vectors
@@ -57,9 +57,4 @@ int main(int argc, char** argv)
     }
     std::cout << std::endl;
     std::cout << "[Compute] Average Time taken: " << (double)(t_avrg / B) << "ms" << std::endl;
-
-    delete[] a;
-    delete[] b;
-    delete[] c;
-    delete[] t;
 }
