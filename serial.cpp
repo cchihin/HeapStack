@@ -135,7 +135,7 @@ void benchmark_compute_heap(double* t, int N, int B)
 void save_time(double* time, int B, const std::string& name)
 {
 	
-	std::string fname = name + ".txt";
+	std::string fname = "logs/" + name + "_" + std::to_string(B) + ".log";
 	std::ofstream outFile(fname);
 	
 	if (outFile.is_open())
@@ -165,19 +165,19 @@ int main(int argc, char** argv)
 	benchmark_allocate_heap(init_heap, N, B);
 	benchmark_allocate_stack(init_stack, N, B);
 	
-	std::string allocate_heap_name = "heap_allocate";
+	std::string allocate_heap_name = "heap_allocate_N" + std::to_string(N);
 	save_time(init_heap, B, allocate_heap_name);
 
-	std::string allocate_stack_name = "stack_allocate";
+	std::string allocate_stack_name = "stack_allocate_N" + std::to_string(N);
 	save_time(init_stack, B, allocate_stack_name);
 
 	benchmark_compute_heap(init_heap, N, B);
 	benchmark_compute_stack(init_stack, N, B);
 	
-	std::string compute_heap_name = "heap_compute";
+	std::string compute_heap_name = "heap_compute_N" + std::to_string(N);
 	save_time(init_heap, B, compute_heap_name);
 
-	std::string compute_stack_name = "stack_compute";
+	std::string compute_stack_name = "stack_compute_N" + std::to_string(N);
 	save_time(init_stack, B, compute_stack_name);
 
 	delete[] init_heap;
