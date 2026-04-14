@@ -1,5 +1,6 @@
 CPP = g++
 SRC = serial.cpp 
+OBJ = $(SRC:.cpp=.o)
 
 all: serial clean
 
