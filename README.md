@@ -38,8 +38,11 @@ The plot is found in `plots/benchmarkplot.png`
 
 
 # Results
-![Heap v.s. Stack allocation (left) vector-addition speed (right)](plots/benchmarkplot.pdf)
+![image](plots/benchmarkplot.pdf)
+Heap v.s. Stack allocation (left) vector-addition speed (right).
 
+1. Allocating chunks of memory on the heap takes a longer time than the stack for large arrays (e.g. N > 10^4)
+2. Performing vector-addition speed is the same between arrays that are allocated on the heap and stack.
 
 # Dependencies
 ```
