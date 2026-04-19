@@ -82,4 +82,4 @@ if __name__ == "__main__":
 
 	fig.set_size_inches(9,5)
 	fig.subplots_adjust(wspace=0.4)
-	fig.savefig('plots/benchmarkplot.pdf', bbox_inches='tight')
+	fig.savefig('plots/benchmarkplot.png', bbox_inches='tight')
