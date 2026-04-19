@@ -1,4 +1,3 @@
 serial
-serial-stack
 *.o
 */__pycache__/
