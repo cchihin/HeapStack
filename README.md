@@ -46,11 +46,11 @@ Heap v.s. Stack allocation (left) vector-addition speed (right).
 
 # Dependencies
 ```
-C++
+// C++ dependencies
 g++ 15.2.1
 make 4.4.1
 
-python
+// python dependencies
 python 3.14.4 
 matplotlib 3.10.8
 numpy 2.4.4
