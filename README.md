@@ -9,8 +9,8 @@ We compile `serial.cpp` using
 make
 ```
 ## Benchmarking
-Next, we benchmark heap and stack allocation and vector addition of an array sized 2**10 to 2**20.
-We note that for array sizes less than 10000 (e.g. 2^10,11,12) and larger than 1000 (e.g. 2^13 >), we average the allocation and vector-addition time over 500000 and 1000 times.
+Next, we benchmark heap and stack allocation and vector addition of an array of sized N=2^10 to N=2^20.
+We note that for array sizes less than 10000 (e.g. N=2^10,11,12) and larger than 1000 (e.g. N>2^12), we average the allocation and vector-addition time over 500000 and 1000 times.
 ```
 ./benchmark.sh
 ```
@@ -38,7 +38,7 @@ The plot is found in `plots/benchmarkplot.png`
 
 
 # Results
-![image](plots/benchmarkplot.pdf)
+![image](plots/benchmarkplot.png)
 Heap v.s. Stack allocation (left) vector-addition speed (right).
 
 1. Allocating chunks of memory on the heap takes a longer time than the stack for large arrays (e.g. N > 10^4)
