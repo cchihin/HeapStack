@@ -26,7 +26,9 @@ def get_allocation():
 		# Computing average and std of stack allocation 
 		avrg_salloc.append(salloc.mean())
 		std_salloc.append(salloc.std())
-	return avrg_halloc, avrg_salloc
+
+	return avrg_halloc, avrg_salloc, \
+		std_halloc, std_salloc
 
 def get_compute():
 	# Plotting allocation speed
@@ -52,34 +54,58 @@ def get_compute():
 		# Computing average and std of stack computeation 
 		avrg_scompute.append(scompute.mean())
 		std_scompute.append(scompute.std())
-	return avrg_hcompute, avrg_scompute
+	return avrg_hcompute, avrg_scompute, \
+		std_hcompute, std_scompute
 
 if __name__ == "__main__":
 
-	fig, ax = plt.subplots(1,2)
+	fig, ax = plt.subplots(2,2)
 	
-	avrg_halloc, avrg_salloc = get_allocation()
+	avrg_halloc, avrg_salloc, \
+	std_halloc, std_salloc = get_allocation()
 
 	N = [2**i for i in range(10, 21, 2)]
 
-	ax[0].semilogx(N, avrg_halloc, '-o', label='Heap')
-	ax[0].semilogx(N, avrg_salloc, '-o', label='Stack')
-	ax[0].grid()
-	ax[0].set_xlabel('Size of array (N)')
-	ax[0].set_ylabel('Clock time (ms)')
-	ax[0].set_title('Heap v.s. Stack Allocation')
-	ax[0].legend()
+	ax[0,0].errorbar(N, avrg_halloc, yerr=std_halloc, capsize=5.0, label='Heap')
+	ax[0,0].errorbar(N, avrg_salloc, yerr=std_salloc, capsize=5.0, label='Stack')
+	ax[0,0].grid()
+	ax[0,0].set_xscale('log')
+	ax[0,0].set_yscale('log')
+	ax[0,0].set_xlabel('Size of array (N)')
+	ax[0,0].set_ylabel('Clock time (ms)')
+	ax[0,0].set_title('Heap v.s. Stack Allocation')
+	ax[0,0].legend()
 
-	avrg_hcompute, avrg_scompute = get_compute()
+	alloc_speedup = np.array(avrg_halloc) / np.array(avrg_salloc)
+	
+	ax[1,0].plot(N, alloc_speedup, 'ko-')
+	ax[1,0].grid()
+	ax[1,0].set_xscale('log')
+	ax[1,0].set_xlabel('Size of array (N)')
+	ax[1,0].set_ylabel('Speed up (Stack / Heap)')
 
-	ax[1].semilogx(N, avrg_hcompute, '-o')
-	ax[1].semilogx(N, avrg_scompute, '-o')
-	ax[1].grid()
-	ax[1].set_ylabel('Clock time (ms)')
-	ax[1].set_title('Heap v.s. Stack Compute')
+	avrg_hcompute, avrg_scompute, \
+	std_hcompute, std_scompute = get_compute()
 
-	fig.suptitle(r'Benchmarking vector addition of $c = a + b \in \mathbb{R}^{N}$' + '\n' + 'between heap and stack allocation and compute', y=1.05)
+	ax[0,1].errorbar(N, avrg_hcompute, yerr=std_hcompute, capsize=5.0, label='Heap')
+	ax[0,1].errorbar(N, avrg_scompute, yerr=std_scompute, capsize=5.0, label='Stack')
+	ax[0,1].grid()
+	ax[0,1].set_xscale('log')
+	ax[0,1].set_yscale('log')
+	ax[0,1].set_ylabel('Clock time (ms)')
+	ax[0,1].set_xlabel('Size of array (N)')
+	ax[0,1].set_title('Heap v.s. Stack Compute')
 
-	fig.set_size_inches(9,5)
+	compute_speedup = np.array(avrg_hcompute) / np.array(avrg_scompute)
+
+	ax[1,1].plot(N, compute_speedup, 'ko-')
+	ax[1,1].grid()
+	ax[1,1].set_xscale('log')
+	ax[1,1].set_xlabel('Size of array (N)')
+	ax[1,1].set_ylabel('Speed up (Stack / Heap)')
+
+	fig.suptitle(r'Benchmarking vector addition of $c = a + b \in \mathbb{R}^{N}$' + '\n' + 'between heap and stack allocation and compute', y=0.98)
+
+	fig.set_size_inches(9,8)
 	fig.subplots_adjust(wspace=0.4)
 	fig.savefig('plots/benchmarkplot.png', bbox_inches='tight')
