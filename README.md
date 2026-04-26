@@ -19,7 +19,7 @@ The benchmark runtimes are stored in `logs/`, and plot the results using `matplo
 ### Creating a python virtual environment [once]
 Create a virtual environment named `heapstack`.
 ```
-python -m venv 
+python -m venv .venv
 ```
 Activating the virtual environment
 ```
