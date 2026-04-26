@@ -4,7 +4,7 @@ HeapStack is an educational repository that benchmark allocation and computation
 
 # Usage
 ## Compilation
-We compile `serial.cpp` using
+We compile `heapstack.cpp` using
 ```
 make
 ```
@@ -19,11 +19,11 @@ The benchmark runtimes are stored in `logs/`, and plot the results using `matplo
 ### Creating a python virtual environment [once]
 Create a virtual environment named `heapstack`.
 ```
-python -m venv heapstack
+python -m venv 
 ```
 Activating the virtual environment
 ```
-source heapstack/bin/activate
+source .venv/bin/activate
 ```
 Installing dependencies
 ```

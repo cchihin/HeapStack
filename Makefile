@@ -1,13 +1,13 @@
 CPP = g++
-SRC = serial.cpp 
+SRC = heapstack.cpp 
 OBJ = $(SRC:.cpp=.o)
 
-all: serial clean
+all: heapstack clean
 
-serial: $(OBJ)
-	$(CPP) $(OBJ) -o serial
+heapstack: $(OBJ)
+	$(CPP) $(OBJ) -o heapstack
 
-serial.o: $(SRC)
+heapstack.o: $(SRC)
 	$(CPP) -c $(SRC) -o $(OBJ)
 
 clean:
